@@ -1,0 +1,412 @@
+@property --ang {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg
+}
+
+.shape {
+    position: relative;
+    padding-top: 64px;
+    animation: shapeIn .9s var(--ease) both
+}
+
+@keyframes shapeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-22px) scale(.985)
+    }
+}
+
+.tabL,
+.tabR {
+    position: absolute;
+    top: 0;
+    height: 64px;
+    background: var(--ink);
+    border-radius: var(--r) var(--r) 0 0;
+    display: flex;
+    align-items: center;
+    z-index: 4
+}
+
+.tabL {
+    left: 0;
+    width: min(48%, 560px);
+    gap: clamp(14px, 3vw, 44px);
+    padding: 0 clamp(18px, 4vw, 52px)
+}
+
+.tabR {
+    right: 110px;
+    padding: 0 30px;
+    justify-content: center
+}
+
+.tabL::after,
+.tabR::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 32px;
+    height: 32px
+}
+
+.tabL::after {
+    right: -32px;
+    background: radial-gradient(circle at 100% 0, transparent 31px, var(--ink) 32px)
+}
+
+.tabR::before {
+    left: -32px;
+    background: radial-gradient(circle at 0 0, transparent 31px, var(--ink) 32px)
+}
+
+.tabL a {
+    color: var(--white);
+    text-decoration: none;
+    position: relative;
+    padding: 4px 0;
+    font: 500 .78rem var(--hd);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    transition: color .3s;
+    white-space: nowrap
+}
+
+.tabL a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--org);
+    box-shadow: 0 0 8px var(--org);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .4s var(--ease)
+}
+
+.tabL a:hover::after,
+.tabL a[aria-current]::after {
+    transform: scaleX(1);
+    transform-origin: left
+}
+
+.tabL a:hover {
+    color: var(--org)
+}
+
+.cut {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 110px;
+    height: 98px;
+    background: var(--page);
+    border-radius: 0 0 0 var(--r);
+    display: grid;
+    place-items: center;
+    z-index: 3
+}
+
+.cut::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 98px;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 0 100%, transparent 39px, var(--page) 40px);
+    pointer-events: none
+}
+
+.body {
+    position: relative;
+    background: var(--ink);
+    border-radius: 0 var(--r) var(--r) var(--r);
+    color: var(--white)
+}
+
+/* ===== Botón descarga: naranja sólido, relleno de progreso ===== */
+.dl {
+    --k: linear-gradient(var(--ink), var(--ink));
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 236px;
+    padding: 13px 34px;
+    border: 2px solid #ffb27a;
+    border-radius: 999px;
+    color: var(--ink);
+    font: 700 .82rem Syne, sans-serif;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    background: var(--k) 24px 0/14px 5px no-repeat, var(--k) calc(100% - 24px) 0/14px 5px no-repeat, var(--k) 24px 100%/14px 5px no-repeat, var(--k) calc(100% - 24px) 100%/14px 5px no-repeat, var(--org);
+    box-shadow: 0 0 0 3px var(--ink), 0 0 24px -2px var(--org), inset 0 -3px 0 #0000002e;
+    transition: transform .25s var(--ease), box-shadow .3s
+}
+
+.dl span {
+    position: relative;
+    z-index: 2
+}
+
+.dl::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, #00000030 0 8px, #0000 8px 16px);
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: fill 2.8s steps(16) infinite
+}
+
+@keyframes fill {
+    0% {
+        transform: scaleX(0)
+    }
+
+    75%,
+    100% {
+        transform: scaleX(1)
+    }
+}
+
+.dl::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 3px;
+    height: 40%;
+    border-radius: 999px 999px 40% 40%;
+    background: linear-gradient(180deg, #ffffff4d, #ffffff0d);
+    pointer-events: none;
+    z-index: 1
+}
+
+.dl:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px var(--ink), 0 0 36px 2px var(--org), inset 0 -3px 0 #0000002e
+}
+
+.dl:active {
+    transform: scale(.96)
+}
+
+.dl.busy {
+    pointer-events: none
+}
+
+.dl.busy::before {
+    animation: none;
+    transform: scaleX(var(--p, 0));
+    transition: transform .1s
+}
+
+/* ===== Carrito ===== */
+.cartbtn {
+    text-decoration: none;
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid #000;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    color: var(--org);
+    margin: 0 0 6px 8px;
+    background: linear-gradient(180deg, #2b2c30, #0a0a0b 50%, #141518);
+    box-shadow: inset 0 1px 0 #ffffff40, 0 0 0 0 #ff6a0088;
+    animation: ring 3s infinite;
+    transition: transform .3s var(--ease)
+}
+
+@keyframes ring {
+    70% {
+        box-shadow: inset 0 1px 0 #ffffff40, 0 0 0 14px #ff6a0000
+    }
+}
+
+.cartbtn:hover {
+    transform: rotate(-6deg) scale(1.08)
+}
+
+.cartbtn::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    padding: 5px 12px;
+    background: var(--ink);
+    color: var(--white);
+    font: .75rem var(--mono);
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: .25s var(--ease);
+    z-index: 10
+}
+
+.cartbtn:hover::after,
+.cartbtn:focus-visible::after {
+    opacity: 1;
+    transform: none
+}
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 4px;
+    background: var(--org);
+    color: var(--ink);
+    font: 700 .7rem/20px var(--mono);
+    font-style: normal;
+    text-align: center;
+    transform: scale(0);
+    transition: transform .3s var(--ease)
+}
+
+.badge.show {
+    transform: scale(1)
+}
+
+.badge.bump {
+    animation: bump .4s
+}
+
+@keyframes bump {
+    50% {
+        transform: scale(1.5)
+    }
+}
+
+.phead {
+    padding: 44px clamp(20px, 4vw, 56px) 40px
+}
+
+.phead h1 {
+    font: 400 clamp(2rem, 4.5vw, 3.2rem) Shojumaru, serif;
+    letter-spacing: .02em
+}
+
+.phead p {
+    color: #cfd0d4;
+    max-width: 56ch;
+    margin-top: 8px
+}
+
+.search {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--ink);
+    background: var(--white);
+    font: .9rem var(--mono);
+    margin-bottom: 14px;
+    transition: box-shadow .3s
+}
+
+.search:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px #ff6a0066
+}
+
+.chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 22px
+}
+
+.chip {
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--ink);
+    background: var(--white);
+    font: .78rem var(--mono);
+    cursor: pointer;
+    transition: .3s
+}
+
+.chip:hover {
+    border-color: var(--org);
+    color: var(--org)
+}
+
+.chip.on {
+    background: var(--ink);
+    color: var(--org);
+    border-color: var(--ink)
+}
+
+@media(max-width:860px) {
+    .tabL {
+        width: calc(100% - 110px)
+    }
+
+    .tabR {
+        display: none
+    }
+
+    .tabL a {
+        font-size: .68rem
+    }
+}
+
+.banner-qg {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    border-radius: 30px;
+    overflow: hidden;
+    /* Importante para que la imagen respete el borde redondeado */
+}
+
+.banner-qg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 0%;
+    display: block;
+}
+
+.banner-qg::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 90%;
+
+    max-width: 1000px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    white-space: normal;
+    /* 👈 Permite saltos de línea */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.banner-qg:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

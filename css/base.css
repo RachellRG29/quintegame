@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Shojumaru&family=Syne:wght@400;700&display=swap");
+
+:root {
+    --ink: #0a0a0b;
+    --ink2: #17181b;
+    --white: #f6f6f4;
+    --org: #ff6a00;
+    --org2: #ff9a3d;
+    --gray: #8b8d94;
+    --page: #e8e9ec;
+    --r: 36px;
+    --ease: cubic-bezier(.2, .8, .2, 1);
+    --hd: Syne, sans-serif;
+    --mono: Syne, sans-serif
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px
+}
+
+body {
+    font: 400 1rem/1.5 Syne, sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--page);
+    background-image: linear-gradient(#0a0a0b0d 1px, transparent 1px), linear-gradient(90deg, #0a0a0b0d 1px, transparent 1px);
+    background-size: 40px 40px
+}
+
+h1,
+h2,
+h3,
+b {
+    font-weight: 700
+}
+
+main {
+    width: min(1240px, 94vw);
+    margin: 22px auto 0;
+    padding-bottom: 70px
+}
+
+:focus-visible {
+    outline: 2px solid var(--org);
+    outline-offset: 3px
+}
+
+.sec {
+    margin-top: 56px
+}
+
+.sec>h2,
+.side>h2 {
+    font: 700 1.1rem var(--hd);
+    letter-spacing: .08em;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.sec>h2::before,
+.side>h2::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--org);
+    box-shadow: 0 0 10px var(--org)
+}
+
+.sec>h2 a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    gap: 6px;
+    transition: gap .3s
+}
+
+.sec>h2 a:hover {
+    gap: 14px;
+    color: var(--org)
+}
+
+.rv {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+    transition-delay: calc(var(--i, 0)*80ms)
+}
+
+.rv.in {
+    opacity: 1;
+    transform: none
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translate(-50%, 120px);
+    padding: 12px 22px;
+    border: 1px solid var(--org);
+    background: var(--ink);
+    color: var(--org);
+    font: 700 .8rem var(--mono);
+    letter-spacing: .06em;
+    z-index: 60;
+    transition: transform .5s var(--ease)
+}
+
+.toast.show {
+    transform: translate(-50%, 0)
+}
+
+footer {
+    text-align: center;
+    color: var(--gray);
+    font: .8rem var(--mono);
+    margin-top: 50px
+}
+
+@media(prefers-reduced-motion:reduce) {
+    * {
+        animation-duration: .01s !important;
+        transition-duration: .01s !important
+    }
+}

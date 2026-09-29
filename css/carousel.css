@@ -1,0 +1,206 @@
+.hero {
+    --a: #ff6a00;
+    --px: 0;
+    --py: 0;
+    position: relative;
+    min-height: 470px;
+    display: flex;
+    align-items: center;
+    padding: 84px clamp(20px, 4vw, 56px) 70px;
+    overflow: hidden
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(45% 80% at 22% 80%, #ff6a0038, transparent 70%)
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(#ffffff0f 1px, transparent 1px) 0 0/44px 44px, linear-gradient(90deg, #ffffff0f 1px, transparent 1px) 0 0/44px 44px;
+    -webkit-mask: radial-gradient(70% 90% at 25% 100%, #000, transparent);
+    mask: radial-gradient(70% 90% at 25% 100%, #000, transparent);
+    animation: grid 5s linear infinite
+}
+
+@keyframes grid {
+    to {
+        background-position: 0 44px, 44px 0
+    }
+}
+
+.imgs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2
+}
+
+.sl {
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+    height: 98%;
+    width: 48%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(-70px) scale(.92);
+    transition: opacity .7s, transform .9s var(--ease);
+    translate: calc(var(--px)*16px) calc(var(--py)*8px)
+}
+
+.sl.on {
+    opacity: 1;
+    transform: none
+}
+
+.sl img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 50px 30px #ff6a0066)
+}
+
+@keyframes float {
+    50% {
+        transform: translateY(-12px)
+    }
+}
+
+.copy {
+    position: relative;
+    z-index: 3;
+    margin-left: auto;
+    width: min(50%, 560px);
+    text-align: right
+}
+
+.copy h1 {
+    font: 400 clamp(2.2rem, 5vw, 3.6rem)/1 Shojumaru, serif;
+    letter-spacing: .02em;
+    text-shadow: 0 0 24px #ffffff30
+}
+
+.txts {
+    display: grid;
+    margin-top: 18px
+}
+
+.txt {
+    grid-area: 1/1;
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity .35s, transform .35s
+}
+
+.txt.on {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: opacity .6s .25s, transform .6s .25s var(--ease)
+}
+
+.txt h2 {
+    font: 700 1.15rem var(--hd);
+    letter-spacing: .08em;
+    margin-bottom: 8px;
+    color: var(--org)
+}
+
+.txt p {
+    text-align: left;
+    max-width: 52ch;
+    margin-left: auto;
+    color: #dcdde1
+}
+
+.more {
+    display: inline-block;
+    margin-top: 28px;
+    color: var(--white);
+    text-decoration: none;
+    font: .8rem var(--mono);
+    position: relative;
+    padding-bottom: 3px
+}
+
+.more::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--org);
+    transition: height .3s, background .3s
+}
+
+.more:hover::after {
+    height: 100%;
+    background: #ff6a0033
+}
+
+.dots {
+    position: absolute;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 5
+}
+
+.dot {
+    width: 34px;
+    height: 5px;
+    border: 0;
+    border-radius: 5px;
+    background: #fff4;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: width .3s
+}
+
+.dot:hover,
+.dot.on {
+    width: 48px
+}
+
+.dot i {
+    position: absolute;
+    inset: 0;
+    background: var(--org);
+    transform: scaleX(var(--p, 0));
+    transform-origin: left
+}
+
+@media(max-width:860px) {
+    .hero {
+        min-height: 600px;
+        align-items: flex-end
+    }
+
+    .sl {
+        height: 52%;
+        width: 80%;
+        left: 10%
+    }
+
+    .copy {
+        width: 100%
+    }
+
+    .dots {
+        left: 20px;
+        transform: none
+    }
+}
