@@ -65,7 +65,7 @@
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 50px 30px #ff6a0066)
+    filter: drop-shadow(0 10px 30px #e1e36036)
 }
 
 @keyframes float {

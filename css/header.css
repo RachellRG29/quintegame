@@ -410,3 +410,33 @@
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+
+
+/* ===== Saldo ===== */
+.saldo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    margin: 0 6px 6px 8px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #2b2c30, #0a0a0b 50%, #141518);
+    border: 1px solid #000;
+    color: var(--org);
+    font: 700 .78rem var(--mono);
+    letter-spacing: .06em;
+    box-shadow: inset 0 1px 0 #ffffff40;
+    vertical-align: middle;
+}
+
+.saldo::before {
+    content: "$";
+    color: var(--white);
+    opacity: .6;
+    margin-right: 2px;
+}
+
+.saldo b {
+    color: var(--org);
+    font-weight: 700;
+}
